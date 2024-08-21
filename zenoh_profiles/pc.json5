@@ -1,0 +1,23 @@
+{
+    mode: "peer",
+    connect: { endpoints: ["tcp/10.42.0.1:7447"] },
+    plugins: {
+      ros2dds: {
+        id: "remote",
+        namespace: "/bot1",
+        deny: {
+          publishers: [".*/_internal/.*"],
+          subscribers: [".*/_internal/.*"],
+          service_servers: [".*/_internal/.*"],
+          service_clients: [".*/_internal/.*"],
+          action_servers: [".*/_internal/.*"],
+          action_clients: [".*/_internal/.*"]
+        },
+        pub_max_frequencies: [
+          ".*/image_raw=10",
+          ".*/camera_info=10"
+        ],
+      },
+      rest: { http_port: 8000 }
+    }
+  }
